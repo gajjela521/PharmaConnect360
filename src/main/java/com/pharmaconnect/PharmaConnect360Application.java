@@ -1,4 +1,4 @@
-package com.pharmaconnect.PharmaConnect360;
+package com.pharmaconnect;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
