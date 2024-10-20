@@ -1,69 +1,48 @@
 package com.pharmaconnect.model;
 
-/*
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-*/
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NonNull;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.lang.NonNull;
-
+@Entity
+@Table(name = "client_details")
+@Getter
+@Setter
 public class ClientDetails {
 
     @Id
-    @NonNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;  // Unique identifier for the client
+
     @NonNull
+    @Column(nullable = false)
+
     private String name;  // Client's name
+
     @NonNull
+    @Column(nullable = false)
+
     private String primaryEmail;  // Primary email address
+
     private String secondaryEmail;  // Secondary email address
+
     @NonNull
+    @Column(nullable = false)
+
     private String primaryMobile;  // Primary mobile number
+
     private String secondaryMobile;  // Secondary mobile number
 
-
-
-    public @NonNull Long getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "ClientDetails{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", primaryEmail='" + primaryEmail + '\'' +
+                ", secondaryEmail='" + secondaryEmail + '\'' +
+                ", primaryMobile='" + primaryMobile + '\'' +
+                ", secondaryMobile='" + secondaryMobile + '\'' +
+                '}';
     }
-
-    public void setId(@NonNull Long id) {
-        this.id = id;
-    }
-
-    public @NonNull String getPrimaryEmail() {
-        return primaryEmail;
-    }
-
-    public void setPrimaryEmail(@NonNull String primaryEmail) {
-        this.primaryEmail = primaryEmail;
-    }
-
-    public String getSecondaryEmail() {
-        return secondaryEmail;
-    }
-
-    public void setSecondaryEmail(String secondaryEmail) {
-        this.secondaryEmail = secondaryEmail;
-    }
-
-    public @NonNull String getPrimaryMobile() {
-        return primaryMobile;
-    }
-
-    public void setPrimaryMobile(@NonNull String primaryMobile) {
-        this.primaryMobile = primaryMobile;
-    }
-
-    public String getSecondaryMobile() {
-        return secondaryMobile;
-    }
-
-    public void setSecondaryMobile(String secondaryMobile) {
-        this.secondaryMobile = secondaryMobile;
-    }
-
-
-
 }

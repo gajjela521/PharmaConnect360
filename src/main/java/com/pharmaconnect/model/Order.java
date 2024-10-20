@@ -1,9 +1,14 @@
 package com.pharmaconnect.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -16,15 +21,13 @@ public class Order {
     @JoinColumn(name = "client_id", nullable = false)
     private ClientDetails clientDetails;  // Client who placed the order
 
-    @ElementCollection
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;  // List of items in the order
 
-    private LocalDateTime orderDate;  // Date and time the order was placed
+    private LocalDateTime orderDate = LocalDateTime.now();  // Date and time the order was placed
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;  // Status of the order
-
-    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -34,30 +37,6 @@ public class Order {
         this.id = id;
     }
 
-    public ClientDetails getClientDetails() {
-        return clientDetails;
-    }
-
-    public void setClientDetails(ClientDetails clientDetails) {
-        this.clientDetails = clientDetails;
-    }
-
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    public LocalDateTime getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
     public OrderStatus getStatus() {
         return status;
     }
@@ -65,4 +44,7 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+
+
 }
+
